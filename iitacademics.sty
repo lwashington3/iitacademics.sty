@@ -1,0 +1,164 @@
+%! Class = iitacademics
+%! Author = Len Washington III
+%! Date = 12/26/2023
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{iitacademics}[2023/08/22 Len Washington III's Class]
+
+\RequirePackage{kvoptions}
+
+\SetupKeyvalOptions{
+	family=iitacademics,
+	prefix=iitacademics@
+}
+
+\DeclareStringOption{title}
+\DeclareStringOption[Len Washington III]{author}
+\DeclareStringOption[\today]{date}
+\DeclareStringOption{subject}
+\DeclareStringOption{code}
+
+\ProcessKeyvalOptions*
+
+\RequirePackage{hyperref}
+\hypersetup{pdftex,
+	bookmarks=false,
+	unicode=false,
+	pdftoolbar=false,
+	pdfmenubar=true,
+	pdffitwindow=false,
+	pdfstartview={FitH},
+	pdfauthor={\iitacademics@author},
+	pdftitle={\iitacademics@title},
+	pdfsubject={\iitacademics@code\ - \iitacademics@subject},
+	colorlinks=true,
+	urlcolor=url-blue,
+	citecolor=SpringGreen4,
+	backref=true,
+	hypertexnames=true
+}
+
+\RequirePackage[x11names,table]{xcolor}
+\definecolor{url-blue}{RGB}{0, 0, 238}
+
+\RequirePackage[pdftex]{graphicx}
+\graphicspath{{images}}
+
+\RequirePackage{doi}
+\RequirePackage[backend=biber,style=authoryear,hyperref=true]{biblatex}
+
+\RequirePackage{enumerate}
+\RequirePackage{threeparttable}
+\RequirePackage{csquotes}
+\RequirePackage{float}
+\RequirePackage{booktabs}
+\RequirePackage[margin=1in]{geometry}
+\RequirePackage{setspace}
+
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\iitacademics@title}
+\fancyhead[R]{\iitacademics@author\ - \thepage}
+\setlength{\headheight}{14.49998pt}
+
+\RequirePackage{catchfilebetweentags}
+\RequirePackage{etoolbox}
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+{}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\RequirePackage{environ}
+\newboolean{inanswer}
+\NewEnviron{answer}[1][blue]{
+	\setboolean{inanswer}{true}
+	\let\oldtable\table
+	\let\endoldtable\endtable
+	\renewenvironment{table}
+	{\@float{table}\color{blue}}
+	{\end@float}
+	%	\renewenvironment{table}{\color{blue}\oldtable}{\endoldtable}
+
+	{\color{#1}
+	\textcolor{#1}{\BODY}}
+	\let\table\oldtable
+	%	\color{saved}
+	%	\tikzset{saved,
+	%		every node/.style={saved},
+	%		every path/.style={saved}}
+	\setboolean{inanswer}{false}
+}
+
+\DeclareCiteCommand{\citetitle}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{labeltitle}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\citeauthor}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\printnames{labelname}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\citeyear}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+    \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+    \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+  \printtext[bibhyperref]{ \usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\footcitetext}[\mkbibfootnotetext]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\textcite}
+  {\boolfalse{cbx:parens}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{textcite}}}
+  {\ifbool{cbx:parens}
+     {\bibcloseparen\global\boolfalse{cbx:parens}}
+     {}%
+   \multicitedelim\fi}
+  {\usebibmacro{textcite:postnote}}
