@@ -72,21 +72,20 @@
 \RequirePackage{environ}
 \newboolean{inanswer}
 \NewEnviron{answer}[1][blue]{
-	\setboolean{inanswer}{true}
-	\let\oldtable\table
-	\let\endoldtable\endtable
-	\renewenvironment{table}
-	{\@float{table}\color{blue}}
-	{\end@float}
+	\setboolean{inanswer}{true}%
+	\let\oldtable\table%
+	\let\endoldtable\endtable%
+	\renewenvironment{table}%
+	{\@float{table}\color{blue}}%
+	{\end@float}%
 	%	\renewenvironment{table}{\color{blue}\oldtable}{\endoldtable}
-
-	{\color{#1}
-	\textcolor{#1}{\BODY}}
-	\let\table\oldtable
-	%	\color{saved}
-	%	\tikzset{saved,
-	%		every node/.style={saved},
-	%		every path/.style={saved}}
+	{\color{#1}%
+	\textcolor{#1}{\BODY}}%
+	\let\table\oldtable%
+	%	\color{saved}%
+	%	\tikzset{saved,%
+	%		every node/.style={saved},%
+	%		every path/.style={saved}}%
 	\setboolean{inanswer}{false}
 }
 
