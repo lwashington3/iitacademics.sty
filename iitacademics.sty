@@ -3,7 +3,7 @@
 %! Date = 12/26/2023
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{iitacademics}[2023/08/22 Len Washington III's Class]
+\ProvidesPackage{iitacademics}[2023/08/22 Len Washington III's Package]
 
 \RequirePackage{kvoptions}
 
@@ -14,7 +14,7 @@
 
 \DeclareStringOption{title}
 \DeclareStringOption[Len Washington III]{author}
-\DeclareStringOption[\today]{date}
+\DeclareStringOption[{\today}]{date}
 \DeclareStringOption{subject}
 \DeclareStringOption{code}
 
@@ -54,6 +54,15 @@
 \RequirePackage{booktabs}
 \RequirePackage[margin=1in]{geometry}
 \RequirePackage{setspace}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{tikz}
+
+\RequirePackage[chapter]{algorithm}
+\RequirePackage{algorithmicx}
+\RequirePackage{algpseudocode}
+\algnewcommand\algorithmicreturns{\textbf{returns}}
+\algnewcommand\Returns{\algorithmicreturns{} }%
 
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
