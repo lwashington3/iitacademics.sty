@@ -47,6 +47,8 @@
 \RequirePackage{doi}
 \RequirePackage[backend=biber,style=authoryear,hyperref=true]{biblatex}
 
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
 \RequirePackage{enumerate}
 \RequirePackage{threeparttable}
 \RequirePackage{csquotes}
@@ -54,6 +56,13 @@
 \RequirePackage{booktabs}
 \RequirePackage[margin=1in]{geometry}
 \RequirePackage{setspace}
+\RequirePackage{tikz}
+
+\RequirePackage[chapter]{algorithm}
+\RequirePackage{algorithmicx}
+\RequirePackage{algpseudocode}
+\algnewcommand\algorithmicreturns{\textbf{returns}}
+\algnewcommand\Returns{\algorithmicreturns{} }%
 
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
@@ -75,7 +84,7 @@
 	\setboolean{inanswer}{true}
 	\let\oldtable\table
 	\let\endoldtable\endtable
-	\renewenvironment{table}
+	\let\table\oldtable\color{bluw}
 	{\@float{table}\color{blue}}
 	{\end@float}
 	%	\renewenvironment{table}{\color{blue}\oldtable}{\endoldtable}
