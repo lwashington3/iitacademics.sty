@@ -82,16 +82,16 @@
 \newboolean{inanswer}
 \NewEnviron{answer}[1][blue]{
 	\setboolean{inanswer}{true}
-	\let\oldtable\table
-	\let\endoldtable\endtable
-	\let\table\oldtable\color{bluw}
+%	\let\oldtable\table
+%	\let\endoldtable\endtable
+%	\let\table\oldtable\color{blue}
 	{\@float{table}\color{blue}}
 	{\end@float}
 	%	\renewenvironment{table}{\color{blue}\oldtable}{\endoldtable}
 
 	{\color{#1}
 	\textcolor{#1}{\BODY}}
-	\let\table\oldtable
+%	\let\table\oldtable
 	%	\color{saved}
 	%	\tikzset{saved,
 	%		every node/.style={saved},
