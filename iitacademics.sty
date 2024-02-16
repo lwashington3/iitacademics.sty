@@ -17,7 +17,6 @@
 \DeclareStringOption[{\today}]{date}
 \DeclareStringOption{subject}
 \DeclareStringOption{code}
-\DeclareStringOption[authoryear]{style}
 
 \ProcessKeyvalOptions*
 
@@ -46,7 +45,7 @@
 \graphicspath{{images}}
 
 \RequirePackage{doi}
-\RequirePackage[backend=biber,style=\iitacademics@style,hyperref=true]{biblatex}
+\RequirePackage[backend=biber,style=authoryear,hyperref=true]{biblatex}
 
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
@@ -86,8 +85,8 @@
 	\let\oldtable\table
 	\let\endoldtable\endtable
 	\let\table\oldtable\color{blue}
-	{\@float{table}\color{blue}}
-	{\end@float}
+%	{\@float{table}\color{blue}}
+%	{\end@float}
 	%	\renewenvironment{table}{\color{blue}\oldtable}{\endoldtable}
 
 	{\color{#1}
