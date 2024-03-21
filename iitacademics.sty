@@ -17,6 +17,7 @@
 \DeclareStringOption[{\today}]{date}
 \DeclareStringOption{subject}
 \DeclareStringOption{code}
+\DeclareStringOption[authoryear]{style}
 
 \ProcessKeyvalOptions*
 
@@ -45,7 +46,7 @@
 \graphicspath{{images}}
 
 \RequirePackage{doi}
-\RequirePackage[backend=biber,style=authoryear,hyperref=true]{biblatex}
+\RequirePackage[backend=biber,style=\iitacademics@style,hyperref=true]{biblatex}
 
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
@@ -82,16 +83,15 @@
 \newboolean{inanswer}
 \NewEnviron{answer}[1][blue]{
 	\setboolean{inanswer}{true}
-	\let\oldtable\table
-	\let\endoldtable\endtable
-	\let\table\oldtable\color{blue}
+%%	\let\oldtable\table
+%%	\let\endoldtable\endtable
+%%	\let\table\oldtable\color{blue}
 %	{\@float{table}\color{blue}}
 %	{\end@float}
 	%	\renewenvironment{table}{\color{blue}\oldtable}{\endoldtable}
-
 	{\color{#1}
 	\textcolor{#1}{\BODY}}
-	\let\table\oldtable
+%	\let\table\oldtable
 	%	\color{saved}
 	%	\tikzset{saved,
 	%		every node/.style={saved},
