@@ -65,6 +65,9 @@
 \algnewcommand\algorithmicreturns{\textbf{returns}}
 \algnewcommand\Returns{\algorithmicreturns{} }%
 
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
@@ -79,95 +82,93 @@
 {}{\typeout{Unsuccessful patch!}}
 \makeatother
 
-\RequirePackage{environ}
 \newboolean{inanswer}
-\NewEnviron{answer}[1][blue]{
+\newenvironment{answer}[1][blue]{%
 	\setboolean{inanswer}{true}
-%%	\let\oldtable\table
-%%	\let\endoldtable\endtable
-%%	\let\table\oldtable\color{blue}
-%	{\@float{table}\color{blue}}
-%	{\end@float}
-	%	\renewenvironment{table}{\color{blue}\oldtable}{\endoldtable}
-	{\color{#1}
-	\textcolor{#1}{\BODY}}
-%	\let\table\oldtable
-	%	\color{saved}
-	%	\tikzset{saved,
-	%		every node/.style={saved},
-	%		every path/.style={saved}}
+	\let\oldtable\table
+	\let\endoldtable\endtable
+	\colorlet{original}{.}
+	\renewenvironment{table}[1][H]{%
+		\oldtable[H]\color{blue} % TODO: Can't pass arguments through to the redefined table
+		}{
+		\endoldtable
+	}
+	\color{blue}
+		{%
+	}
+	\let\table\oldtable
 	\setboolean{inanswer}{false}
 }
 
 \DeclareCiteCommand{\citetitle}
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \printtext[bibhyperref]{\usebibmacro{labeltitle}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+{\usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+\printtext[bibhyperref]{\usebibmacro{labeltitle}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\citeauthor}
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \printtext[bibhyperref]{\printnames{labelname}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+{\usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+\printtext[bibhyperref]{\printnames{labelname}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\citeyear}
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \printtext[bibhyperref]{\usebibmacro{citeyear}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+{\usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+\printtext[bibhyperref]{\usebibmacro{citeyear}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\cite}
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \printtext[bibhyperref]{\usebibmacro{cite}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+{\usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+\printtext[bibhyperref]{\usebibmacro{cite}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 \DeclareCiteCommand*{\cite}
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \printtext[bibhyperref]{\usebibmacro{citeyear}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+{\usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+\printtext[bibhyperref]{\usebibmacro{citeyear}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\parencite}[\mkbibparens]
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-    \printtext[bibhyperref]{\usebibmacro{cite}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+{\usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+\printtext[bibhyperref]{\usebibmacro{cite}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 \DeclareCiteCommand*{\parencite}[\mkbibparens]
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-    \printtext[bibhyperref]{\usebibmacro{citeyear}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+{\usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+\printtext[bibhyperref]{\usebibmacro{citeyear}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\footcite}[\mkbibfootnote]
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-  \printtext[bibhyperref]{ \usebibmacro{cite}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+{\usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+\printtext[bibhyperref]{ \usebibmacro{cite}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\footcitetext}[\mkbibfootnotetext]
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \printtext[bibhyperref]{\usebibmacro{cite}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+{\usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+\printtext[bibhyperref]{\usebibmacro{cite}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\textcite}
-  {\boolfalse{cbx:parens}}
-  {\usebibmacro{citeindex}%
-   \printtext[bibhyperref]{\usebibmacro{textcite}}}
-  {\ifbool{cbx:parens}
-     {\bibcloseparen\global\boolfalse{cbx:parens}}
-     {}%
-   \multicitedelim\fi}
-  {\usebibmacro{textcite:postnote}}
+{\boolfalse{cbx:parens}}
+{\usebibmacro{citeindex}%
+\printtext[bibhyperref]{\usebibmacro{textcite}}}
+{\ifbool{cbx:parens}
+{\bibcloseparen\global\boolfalse{cbx:parens}}
+{}%
+\multicitedelim\fi}
+{\usebibmacro{textcite:postnote}}
