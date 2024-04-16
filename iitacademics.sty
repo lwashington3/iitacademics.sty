@@ -65,6 +65,9 @@
 \algnewcommand\algorithmicreturns{\textbf{returns}}
 \algnewcommand\Returns{\algorithmicreturns{} }%
 
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
@@ -80,22 +83,24 @@
 \makeatother
 
 \newboolean{inanswer}
-\colorlet{answer}{blue}
-\newenvironment{answer}{%
-	\setboolean{inanswer}{true}
-	\let\oldtable\table
-	\let\endoldtable\endtable
-	\colorlet{original}{.}
-	\renewenvironment{table}[1][H]{%
-		\oldtable[H]\color{answer} % TODO: Can't pass arguments through to the redefined table
-	}{
-	\endoldtable}
-	% FIXME: Either the tables will be blue, or the text, but not both for some reason
-	\textcolor{answer}{
-}{
-	}
-	\let\table\oldtable
-	\setboolean{inanswer}{false}
+\newenvironment{answer}[1][blue]{%
+		\setboolean{inanswer}{true}%
+		\let\oldtable\table%
+		\let\endoldtable\endtable%
+		\colorlet{original}{.}%
+		% TODO: Can't pass arguments through to the redefined table
+		\renewenvironment{table}[1][H]{%
+				\oldtable[H]\color{blue}%
+			}%
+			{%
+				\endoldtable%
+		}%
+		\color{blue}{%
+	}%
+	{%
+		}%
+		\let\table\oldtable%
+		\setboolean{inanswer}{false}%
 }
 
 \DeclareCiteCommand{\citetitle}
