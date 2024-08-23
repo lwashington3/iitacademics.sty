@@ -86,21 +86,22 @@
 \makeatother
 
 \newboolean{inanswer}
-\newenvironment{answer}[1][blue]{%
-		\setboolean{inanswer}{true}%
-		\let\oldtable\table%
-		\let\endoldtable\endtable%
-		\colorlet{original}{.}%
-		\renewenvironment{table}[1][H]{%
-			\oldtable[H]\color{blue} % TODO: Can't pass arguments through to the redefined table
-			}{
-			\endoldtable%
-		}%
-		\color{blue}%
-	{%
+\colorlet{answercolor}{blue}
+\newenvironment{answer}{%
+	\setboolean{inanswer}{true}%
+	\let\oldtable\table%
+	\let\endoldtable\endtable%
+	\colorlet{original}{.}%
+	\renewenvironment{table}[1][H]{%
+		\oldtable[H]\color{answercolor}% TODO: Can't pass arguments through to the redefined table
+		}{%
+		\endoldtable%
 	}%
-		\let\table\oldtable%
-		\setboolean{inanswer}{false}%
+	\color{answercolor}%
+{%
+}%
+	\let\table\oldtable%
+	\setboolean{inanswer}{false}%
 }
 
 \DeclareCiteCommand{\citetitle}
