@@ -20,8 +20,22 @@
 \DeclareStringOption[authoryear]{style}
 \DeclareBoolOption[false]{abbreviated}
 
-
 \ProcessKeyvalOptions*
+
+\newcommand{\abbreviate}[3]{%
+	\newcommand{#1}{\ifiitacademics@abbreviated{#3}\else{#2}\fi}
+}
+
+\abbreviate{\w}{with}{w/}
+\abbreviate{\W}{With}{W/}
+\abbreviate{\wo}{without}{w/o}
+\abbreviate{\Wo}{Without}{W/o}
+\abbreviate{\win}{within}{w/in}
+\abbreviate{\Win}{Within}{W/in}
+\abbreviate{\wrt}{with respect to}{w.r.t}
+\abbreviate{\Wrt}{With respect to}{W.r.t}
+\abbreviate{\st}{subject to}{s.t.}
+\abbreviate{\St}{Subject to}{S.t.}
 
 \RequirePackage{hyperref}
 \hypersetup{pdftex,
@@ -71,7 +85,6 @@
 
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
-
 
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
@@ -178,17 +191,3 @@
 {}%
 \multicitedelim\fi}
 {\usebibmacro{textcite:postnote}}
-
-\newcommand{\abbreviate}[3]{%
-	\newcommand{#1}{\ifiitacademics@abbreviated#3\else#2\fi}
-}
-\abbreviate{\w}{with}{w/}
-\abbreviate{\W}{With}{W/}
-\abbreviate{\wo}{without}{w/o}
-\abbreviate{\Wo}{Without}{W/o}
-\abbreviate{\win}{within}{w/in}
-\abbreviate{\Win}{Within}{W/in}
-\abbreviate{\wrt}{with respect to}{w.r.t}
-\abbreviate{\Wrt}{With respect to}{W.r.t}
-\abbreviate{\st}{subject to}{s.t.}
-\abbreviate{\St}{Subject to}{S.t.}
