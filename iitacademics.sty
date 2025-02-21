@@ -18,6 +18,8 @@
 \DeclareStringOption{subject}
 \DeclareStringOption{code}
 \DeclareStringOption[authoryear]{style}
+\DeclareBoolOption[false]{abbreviated}
+
 
 \ProcessKeyvalOptions*
 
@@ -176,3 +178,17 @@
 {}%
 \multicitedelim\fi}
 {\usebibmacro{textcite:postnote}}
+
+\newcommand{\abbreviate}[3]{%
+	\newcommand{#1}{\ifiitacademics@abbreviated#3\else#2\fi}
+}
+\abbreviate{\w}{with}{w/}
+\abbreviate{\W}{With}{W/}
+\abbreviate{\wo}{without}{w/o}
+\abbreviate{\Wo}{Without}{W/o}
+\abbreviate{\win}{within}{w/in}
+\abbreviate{\Win}{Within}{W/in}
+\abbreviate{\wrt}{with respect to}{w.r.t}
+\abbreviate{\Wrt}{With respect to}{W.r.t}
+\abbreviate{\st}{subject to}{s.t.}
+\abbreviate{\St}{Subject to}{S.t.}
